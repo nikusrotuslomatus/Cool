@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>Teamplay project</title>
+{% endblock %}
+
+{% block body %}
+<div class="content">
+    
+    <h1 style="text-align: center">Chat</h1>
+    {% if tasks|length < 1 %}
+    <h4 style="text-align: center">Silence</h4>
+    {% else %}
+    <table>
+        <tr>
+            <th>Text</th>
+            <th>Added</th>
+            <th>Actions</th>
+            <th>Name</th>
+        </tr>
+        
+        {% for task in tasks %}
+            <tr>
+                <font color={{task.colour}}>
+                <td>{{ task.content }}</td>
+                </font>
+                <td>{{ task.date_created.date() }}</td>
+                <td>
+                    <a href="/update/{{task.id}}">Color change</a>
+                </td>
+                <td>{{ task.name }}</td>
+            </tr>
+        {% endfor %}
+
+    </table>
+    
+    {% endif %}
+
+    <div class="form">
+        <form action="/" method="POST">
+            <input type="text" name="content" id="content">
+            <input type="text" name="content" id="comp">
+            <input type="submit" value="Add Task">
+
+        </form>
+
+    </div>
+</div>
+{% endblock %}
